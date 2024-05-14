@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name" translation_description="Visio-Guide 2024">Visio-Guide 2024</string>
+    <string name="speech_prompt">say hello</string>
+    <string name="speech_not_supported">not supported</string>
+    <string name="editText_hint">Enter city name</string>
+    <string name="weather_img">weather image</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="batter_percentage">battery</string>
+    <string name="instructions"><b>INSTRUCTIONS</b></string>
+    <string name="features">
+        Say <b>READ</b> to read the text using camera.
+        \n\n Say <b>OBJECT DETECTION</b> to detect  the object.
+        \n\n Say <b>CALCULATOR</b> to perform mathematical calculations.
+        \n\n Say <b>WEATHER</b> to get weather details.
+        \n\n Say <b>NAVIGATION</b> to navigate to the destination.
+        \n\n Say <b>BATTERY</b> to get battery percentage.
+        \n\n Say <b>TIME AND DATE</b> for time and date.
+        \n\n Say <b>BACK</b> to return to Home screen
+        \n\n Say <b>EXIT</b> to close the application.
+
+    </string>
+
+</resources>
