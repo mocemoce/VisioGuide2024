@@ -40,7 +40,7 @@ public class Features extends AppCompatActivity {
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.US);
                     textToSpeech.setSpeechRate(1f);
-                    textToSpeech.speak("Say read for read, object detection to detect objects, calculator to perform mathematical calculations, weather to get weather details, navigation to navigate, battery to get battery percentage, time and date for time and date. Say back to return to Home screen. Say exit for closing the application. Swipe left and say what you want ", TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.speak("Say read for read. Object detection to detect objects. Calculator to perform mathematical calculations. Weather to get weather details. Navigation to navigate. Battery to get battery percentage. Time and date for time and date. Say back to return to Home screen. Say exit for closing the application. Swipe left and say what you want ", TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
         });

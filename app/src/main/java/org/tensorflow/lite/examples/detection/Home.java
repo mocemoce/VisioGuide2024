@@ -8,8 +8,10 @@ import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.MotionEvent;
 import android.widget.TextView;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import org.tensorflow.lite.examples.detection.Message.MessageReader;
 import org.tensorflow.lite.examples.detection.Moneytransfer.Banktransfer;
 import org.tensorflow.lite.examples.detection.Moneytransfer.phonetransfer;
@@ -32,19 +34,21 @@ public class Home extends AppCompatActivity {
     public static String name;
     private static String city;
 
+    private Handler handler;
+    private Runnable repeatMessageRunnable;
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
 
+        mVoiceInputTv = findViewById(R.id.voiceInput);
+        handler = new Handler();
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             textToSpeech = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
@@ -55,8 +59,7 @@ public class Home extends AppCompatActivity {
                         textToSpeech.setLanguage(Locale.US);
                         textToSpeech.setSpeechRate(1f);
                         if (firstTime == 0)
-                            textToSpeech.speak("Welcome to Visio Guide. Swipe right to listen the features of the app and swipe left and say what you want", TextToSpeech.QUEUE_FLUSH, null);
-                        //when user return from another activities to main activities.
+                            startRepeatingMessage();
                         if (firstTime != 0)
                             textToSpeech.speak("You are in main menu. just swipe left and say what you want.", TextToSpeech.QUEUE_FLUSH, null);
 
@@ -64,10 +67,21 @@ public class Home extends AppCompatActivity {
                 }
             });
         }
+    }
 
+    private void startRepeatingMessage() {
+        repeatMessageRunnable = new Runnable() {
+            @Override
+            public void run() {
+                textToSpeech.speak("Welcome to Visio Guide. Swipe right to listen the features of the app and swipe left and say what you want", TextToSpeech.QUEUE_FLUSH, null);
+                handler.postDelayed(this, 10000); // Repeat every 10 seconds
+            }
+        };
+        handler.postDelayed(repeatMessageRunnable, 1000); // Initial delay before first message
+    }
 
-        mVoiceInputTv = (TextView) findViewById(R.id.voiceInput);
-
+    private void stopRepeatingMessage() {
+        handler.removeCallbacks(repeatMessageRunnable);
     }
 
 
@@ -91,17 +105,12 @@ public class Home extends AppCompatActivity {
                 if (x1 > x2) {
                     firstTime = 1;
                     startVoiceInput();
-
                     break;
                 }
-
-
                 break;
         }
-
         return false;
     }
-
 
     private void startVoiceInput() {
 
@@ -212,14 +221,10 @@ public class Home extends AppCompatActivity {
                     } else {
                         textToSpeech.speak("Do not understand Swipe left Say again", TextToSpeech.QUEUE_FLUSH, null);
                     }
-
                 }
             }
-
-
         }
     }
-
 
     @Override
     protected void onResume() {
@@ -232,8 +237,6 @@ public class Home extends AppCompatActivity {
         if (textToSpeech != null) {
             textToSpeech.stop();
         }
-
+        stopRepeatingMessage();
     }
-
-
 }
