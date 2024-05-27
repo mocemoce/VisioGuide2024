@@ -61,8 +61,7 @@ public class Home extends AppCompatActivity {
                         if (firstTime == 0)
                             startRepeatingMessage();
                         if (firstTime != 0)
-                            textToSpeech.speak("You are in main menu. just swipe left and say what you want.", TextToSpeech.QUEUE_FLUSH, null);
-
+                            textToSpeech.speak("You are in main menu. Swipe right to listen the features of the app and swipe left and say what you want.", TextToSpeech.QUEUE_FLUSH, null);
                     }
                 }
             });
@@ -73,7 +72,7 @@ public class Home extends AppCompatActivity {
         repeatMessageRunnable = new Runnable() {
             @Override
             public void run() {
-                textToSpeech.speak("Welcome to Visio Guide. Swipe right to listen the features of the app and swipe left and say what you want", TextToSpeech.QUEUE_FLUSH, null);
+                textToSpeech.speak("Welcome to Visio Guide. Swipe right to listen the features of the app and swipe left and say what you want.", TextToSpeech.QUEUE_FLUSH, null);
                 handler.postDelayed(this, 10000); // Repeat every 10 seconds
             }
         };
