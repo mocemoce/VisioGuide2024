@@ -39,7 +39,7 @@ public class Features extends AppCompatActivity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.US);
-                    textToSpeech.setSpeechRate(1f);
+                    textToSpeech.setSpeechRate(0.70f);
                     textToSpeech.speak("Say read for read. Object detection to detect objects. Calculator to perform mathematical calculations. Weather to get weather details. Navigation to navigate. Battery to get battery percentage. Time and date for time and date. Say back to return to Home screen. Say exit for closing the application. Swipe left and say what you want ", TextToSpeech.QUEUE_FLUSH, null);
                 }
             }

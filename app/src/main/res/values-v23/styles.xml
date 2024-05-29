@@ -3,10 +3,10 @@
 
     <style name="AppTheme.ObjectDetection" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/cadmium</item>
-        <item name="colorPrimaryDark">@color/cadmium</item>
+        <item name="colorPrimary">@color/sti</item>
+        <item name="colorPrimaryDark">@color/sti</item>
         <item name="colorAccent">@color/grey</item>
-        <item name="android:statusBarColor">@color/cadmium</item>
+        <item name="android:statusBarColor">@color/sti</item>
         <item name="android:windowLightStatusBar">true</item> <!-- Light status bar icons -->
         <item name="actionMenuTextColor">@color/grey</item>
         <item name="colorControlNormal">@color/grey</item> <!-- This will tint action bar icons -->
