@@ -36,7 +36,7 @@ public final class DetectionResult implements Comparable<DetectionResult> {
     public int compareTo (DetectionResult other) {
         return Float.compare(other.getConfidence(), this.getConfidence());
     }
-
+/*
     @Override
     public String toString() {
         return "DetectionResult{" +
@@ -46,5 +46,5 @@ public final class DetectionResult implements Comparable<DetectionResult> {
                 ", location=" + location +
                 '}';
     }
-
+*/
 }

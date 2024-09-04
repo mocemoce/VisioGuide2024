@@ -39,7 +39,7 @@ public class Features extends AppCompatActivity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.US);
-                    textToSpeech.setSpeechRate(0.70f);
+                    textToSpeech.setSpeechRate(0.85f);
                     textToSpeech.speak("Say read for read. Object detection to detect objects. Calculator to perform mathematical calculations. Weather to get weather details. Navigation to navigate. Battery to get battery percentage. Time and date for time and date. Say back to return to Home screen. Say exit for closing the application. Swipe left and say what you want ", TextToSpeech.QUEUE_FLUSH, null);
                 }
             }
@@ -96,12 +96,12 @@ public class Features extends AppCompatActivity {
                 /*} else if (mVoiceInputTv.getText().toString().contains("calculator")) {
                     Intent intent = new Intent(getApplicationContext(), Calculator.class);
                     startActivity(intent);
-                    mVoiceInputTv.setText(null);
+                    mVoiceInputTv.setText(null);*/
                 } else if (mVoiceInputTv.getText().toString().contains("time and date")) {
                     Intent intent = new Intent(getApplicationContext(), DateAndTime.class);
                     startActivity(intent);
                     mVoiceInputTv.setText(null);
-                } else if (mVoiceInputTv.getText().toString().contains("weather")) {
+                /*} else if (mVoiceInputTv.getText().toString().contains("weather")) {
                     Intent intent = new Intent(getApplicationContext(), Weather.class);
                     startActivity(intent);
                     mVoiceInputTv.setText(null);*/

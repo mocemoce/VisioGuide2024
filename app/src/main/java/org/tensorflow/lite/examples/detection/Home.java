@@ -57,7 +57,7 @@ public class Home extends AppCompatActivity {
                 public void onInit(int status) {
                     if (status != TextToSpeech.ERROR) {
                         textToSpeech.setLanguage(Locale.US);
-                        textToSpeech.setSpeechRate(0.70f);
+                        textToSpeech.setSpeechRate(0.85f);
                         if (firstTime == 0)
                             startRepeatingMessage();
                         if (firstTime != 0)
@@ -143,11 +143,12 @@ public class Home extends AppCompatActivity {
                     /*} else if (mVoiceInputTv.getText().toString().contains("calculator")) {
                         Intent intent = new Intent(getApplicationContext(), Calculator.class);
                         startActivity(intent);
-                        mVoiceInputTv.setText(null);
+                        mVoiceInputTv.setText(null);*/
                     } else if (mVoiceInputTv.getText().toString().contains("time and date")) {
                         Intent intent = new Intent(getApplicationContext(), DateAndTime.class);
                         startActivity(intent);
                         mVoiceInputTv.setText(null);
+                        /*
                     } else if (mVoiceInputTv.getText().toString().contains("weather")) {
                         Intent intent = new Intent(getApplicationContext(), Weather.class);
                         startActivity(intent);

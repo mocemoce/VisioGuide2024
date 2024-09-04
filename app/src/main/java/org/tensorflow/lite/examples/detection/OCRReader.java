@@ -32,6 +32,7 @@ import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import org.tensorflow.lite.examples.detection.Location.LocationActivity;
+import org.tensorflow.lite.examples.detection.ObjectDetection.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -65,9 +66,8 @@ public class OCRReader extends AppCompatActivity {
             public void onInit(int status) {
                 if (status != TextToSpeech.ERROR) {
                     textToSpeech.setLanguage(Locale.CANADA);
-                    textToSpeech.setSpeechRate(1f);
-                    Toast.makeText(OCRReader.this, "swipe right and say yes to read and say no to return back to main menu", Toast.LENGTH_SHORT).show();
-                    textToSpeech.speak("swipe right and say yes to read and say no to return back to main menu", TextToSpeech.QUEUE_ADD, null);
+                    textToSpeech.setSpeechRate(0.85f);
+                    textToSpeech.speak("Swipe right and say yes to read, say back to return, or swipe left to listen again.", TextToSpeech.QUEUE_ADD, null);
                 }
             }
         });
@@ -86,15 +86,13 @@ public class OCRReader extends AppCompatActivity {
                 y2 = touchEvent.getY();
                 if (x1 < x2) {
                     textToSpeech.speak(stringResult, TextToSpeech.QUEUE_FLUSH, null);
-                    textToSpeech.speak("Swipe left to listen again. or swipe right and say what you want", TextToSpeech.QUEUE_ADD, null);
+                    textToSpeech.speak("Swipe right and say yes to read, say back to return, or swipe left to listen again.", TextToSpeech.QUEUE_ADD, null);
 
                 } else if (x1 > x2) {
                     startVoiceInput();
                 }
-
                 break;
         }
-
         return false;
     }
 
@@ -113,7 +111,6 @@ public class OCRReader extends AppCompatActivity {
             @Override
             public void run() {
                 textToSpeech.speak("Image is clearly visible tap on the screen", TextToSpeech.QUEUE_FLUSH, null);
-
             }
         }, 5000);
 
@@ -182,7 +179,6 @@ public class OCRReader extends AppCompatActivity {
         textView.setText(stringResult);
         textToSpeech.speak(stringResult, TextToSpeech.QUEUE_FLUSH, null, null);
         textToSpeech.speak("Swipe left to listen again. or swipe right and say what you want", TextToSpeech.QUEUE_ADD, null);
-
     }
 
 
@@ -209,37 +205,20 @@ public class OCRReader extends AppCompatActivity {
                     if (mVoiceInputTv.getText().toString().contains("read")) {
                         Intent intent = new Intent(getApplicationContext(), OCRReader.class);
                         startActivity(intent);
-                    } else if (mVoiceInputTv.getText().toString().contains("time and date")) {
-                        Intent intent = new Intent(getApplicationContext(), DateAndTime.class);
-                        startActivity(intent);
-                    } else if (mVoiceInputTv.getText().toString().contains("battery")) {
-                        Intent intent = new Intent(getApplicationContext(), Battery.class);
-                        startActivity(intent);
-                        mVoiceInputTv.setText(null);
-                    } else if (mVoiceInputTv.getText().toString().contains("location")) {
-                        Intent intent = new Intent(getApplicationContext(), LocationActivity.class);
-                        startActivity(intent);
-                        mVoiceInputTv.setText(null);
-                    } else if (mVoiceInputTv.getText().toString().contains("weather")) {
-                        Intent intent = new Intent(getApplicationContext(), Weather.class);
-                        startActivity(intent);
-                        mVoiceInputTv.setText(null);
-                    } else if (mVoiceInputTv.getText().toString().contains("calculator")) {
-                        Intent intent = new Intent(getApplicationContext(), Calculator.class);
+                    } else if (mVoiceInputTv.getText().toString().contains("object")) {
+                        onPause();
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         mVoiceInputTv.setText(null);
                     } else if (mVoiceInputTv.getText().toString().contains("back")) {
-                        Intent intent = new Intent(getApplicationContext(), Home.class);
+                        Intent intent = new Intent(getApplicationContext(), Features.class);
                         startActivity(intent);
                         mVoiceInputTv.setText(null);
+                    } else if (mVoiceInputTv.getText().toString().contains("back")) {
+                        mVoiceInputTv.setText(null);
+                        startActivity(new Intent(this, Features.class));
                     } else if (mVoiceInputTv.getText().toString().contains("exit")) {
                         finish();
-                    } else if (mVoiceInputTv.getText().toString().contains("main")) {
-                        Intent i = new Intent(OCRReader.this, OCRReader.class);
-                        startActivity(i);
-                    } else if (mVoiceInputTv.getText().toString().contains("back")) {
-                        mVoiceInputTv.setText(null);
-                        startActivity(new Intent(this, Home.class));
                     } else if (mVoiceInputTv.getText().toString().contains("yes")) {
                         setContentView(R.layout.surface);
                         surfaceView = findViewById(R.id.surfaceView);
@@ -256,25 +235,19 @@ public class OCRReader extends AppCompatActivity {
                         handler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                textToSpeech.speak("you are in main menu. just swipe right and say what you want", TextToSpeech.QUEUE_FLUSH, null);
-
+                                textToSpeech.speak("You are in main menu. Swipe right to listen to the features of the app or swipe left and say what you want", TextToSpeech.QUEUE_FLUSH, null);
                             }
                         }, 1000);
-
-                        Intent intent = new Intent(getApplicationContext(), Features.class);
+                        Intent intent = new Intent(getApplicationContext(), Home.class);
                         startActivity(intent);
                     }
                 } else {
                     textToSpeech.speak("Do not understand Swipe left Say again", TextToSpeech.QUEUE_FLUSH, null);
                 }
-
                 break;
-
             }
         }
-
     }
-
 
     public void onPause() {
         if (textToSpeech != null) {
@@ -282,5 +255,4 @@ public class OCRReader extends AppCompatActivity {
         }
         super.onPause();
     }
-
 }
